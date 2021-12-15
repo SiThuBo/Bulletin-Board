@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site/BulletinBoard" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\VB\.Net\\Bulletin\ Board\\Bulletin\ Board\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\VB\.Net\\Bulletin\ Board\\Bulletin\ Board\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="BulletinBoardEntities-Web.config Connection String" description="" value="metadata=res://*/DB_Entity.BulletinBoardModel.csdl|res://*/DB_Entity.BulletinBoardModel.ssdl|res://*/DB_Entity.BulletinBoardModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=SITHUBO-PC;Initial Catalog=master;User ID=sa;Password=P#ssword1234@&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\VB\.Net\\Bulletin\ Board\\Bulletin\ Board\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BulletinBoardEntities']/@connectionString" />
+  </parameter>
+  <parameter name="ConString-Web.config Connection String" description="" value="Data Source=SITHUBO-PC;Initial Catalog=BulletinBoard;User ID=sa;Password=P#ssword1234@" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\VB\.Net\\Bulletin\ Board\\Bulletin\ Board\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ConString']/@connectionString" />
+  </parameter>
+  <parameter name="BulletinBoardContainer-Web.config Connection String" description="" value="metadata=res://*/DB_Entity.BulletinBoard.csdl|res://*/DB_Entity.BulletinBoard.ssdl|res://*/DB_Entity.BulletinBoard.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SITHUBO-PC;initial catalog=master;user id=sa;password=P#ssword1234@;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\VB\.Net\\Bulletin\ Board\\Bulletin\ Board\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BulletinBoardContainer']/@connectionString" />
+  </parameter>
+</parameters>

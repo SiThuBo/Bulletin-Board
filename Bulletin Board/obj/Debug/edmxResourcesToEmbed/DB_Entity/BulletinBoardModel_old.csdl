@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="BulletinBoard_OJT.DB_Entity" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="BulletinBoardEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Posts" EntityType="BulletinBoard_OJT.DB_Entity.Posts" />
+    <EntitySet Name="Users" EntityType="BulletinBoard_OJT.DB_Entity.Users" />
+    <EntitySet Name="Roles" EntityType="BulletinBoard_OJT.DB_Entity.Roles" />
+    <AssociationSet Name="usersroles" Association="BulletinBoard_OJT.DB_Entity.usersroles">
+      <End Role="users" EntitySet="Users" />
+      <End Role="roles" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="createduser" Association="BulletinBoard_OJT.DB_Entity.createduser">
+      <End Role="users" EntitySet="Users" />
+      <End Role="users1" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="updateduser" Association="BulletinBoard_OJT.DB_Entity.updateduser">
+      <End Role="users" EntitySet="Users" />
+      <End Role="users1" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="usersposts" Association="BulletinBoard_OJT.DB_Entity.usersposts">
+      <End Role="users" EntitySet="Users" />
+      <End Role="posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="usersposts1" Association="BulletinBoard_OJT.DB_Entity.usersposts1">
+      <End Role="users" EntitySet="Users" />
+      <End Role="posts" EntitySet="Posts" />
+    </AssociationSet>
+    <EntitySet Name="ImageFiles" EntityType="BulletinBoard_OJT.DB_Entity.ImageFile" />
+  </EntityContainer>
+  <EntityType Name="Posts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Status" Type="String" Nullable="false" DefaultValue="1" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="User1" Relationship="BulletinBoard_OJT.DB_Entity.usersposts" FromRole="posts" ToRole="users" />
+    <Property Name="Updated_User_Id" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="BulletinBoard_OJT.DB_Entity.usersposts1" FromRole="posts" ToRole="users" />
+    <Property Name="Created_User_Id" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Profile" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Dob" Type="DateTime" Nullable="true" Precision="3" />
+    <Property Name="Deleted_User_Id" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Deleted_At" Type="DateTime" Nullable="true" Precision="3" DefaultValue="active" />
+    <NavigationProperty Name="Role" Relationship="BulletinBoard_OJT.DB_Entity.usersroles" FromRole="users" ToRole="roles" />
+    <Property Name="Roles_Id" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Users1" Relationship="BulletinBoard_OJT.DB_Entity.createduser" FromRole="users" ToRole="users1" />
+    <NavigationProperty Name="User" Relationship="BulletinBoard_OJT.DB_Entity.createduser" FromRole="users1" ToRole="users" />
+    <Property Name="Created_User_Id" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Users2" Relationship="BulletinBoard_OJT.DB_Entity.updateduser" FromRole="users" ToRole="users1" />
+    <NavigationProperty Name="User1" Relationship="BulletinBoard_OJT.DB_Entity.updateduser" FromRole="users1" ToRole="users" />
+    <Property Name="Updated_User_Id" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Posts1" Relationship="BulletinBoard_OJT.DB_Entity.usersposts" FromRole="users" ToRole="posts" />
+    <NavigationProperty Name="Posts" Relationship="BulletinBoard_OJT.DB_Entity.usersposts1" FromRole="users" ToRole="posts" />
+    <Property Name="Is_Delete" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" DefaultValue="active" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="BulletinBoard_OJT.DB_Entity.usersroles" FromRole="roles" ToRole="users" />
+  </EntityType>
+  <Association Name="usersroles">
+    <End Type="BulletinBoard_OJT.DB_Entity.Users" Role="users" Multiplicity="*" />
+    <End Type="BulletinBoard_OJT.DB_Entity.Roles" Role="roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="Roles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="createduser">
+    <End Type="BulletinBoard_OJT.DB_Entity.Users" Role="users" Multiplicity="1" />
+    <End Type="BulletinBoard_OJT.DB_Entity.Users" Role="users1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="users1">
+        <PropertyRef Name="Created_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="updateduser">
+    <End Type="BulletinBoard_OJT.DB_Entity.Users" Role="users" Multiplicity="1" />
+    <End Type="BulletinBoard_OJT.DB_Entity.Users" Role="users1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="users1">
+        <PropertyRef Name="Updated_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="usersposts">
+    <End Type="BulletinBoard_OJT.DB_Entity.Users" Role="users" Multiplicity="1" />
+    <End Type="BulletinBoard_OJT.DB_Entity.Posts" Role="posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="posts">
+        <PropertyRef Name="Updated_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="usersposts1">
+    <End Type="BulletinBoard_OJT.DB_Entity.Users" Role="users" Multiplicity="1" />
+    <End Type="BulletinBoard_OJT.DB_Entity.Posts" Role="posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="posts">
+        <PropertyRef Name="Created_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ImageFile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="FilePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Uploaded_User_Id" Type="Guid" Nullable="false" />
+  </EntityType>
+</Schema>
